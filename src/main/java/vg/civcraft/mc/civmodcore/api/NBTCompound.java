@@ -3,16 +3,16 @@ package vg.civcraft.mc.civmodcore.api;
 import com.google.common.base.Preconditions;
 import java.util.UUID;
 import javax.annotation.Nonnull;
-import net.minecraft.server.v1_14_R1.NBTBase;
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagDouble;
-import net.minecraft.server.v1_14_R1.NBTTagFloat;
-import net.minecraft.server.v1_14_R1.NBTTagList;
-import net.minecraft.server.v1_14_R1.NBTTagLong;
-import net.minecraft.server.v1_14_R1.NBTTagShort;
-import net.minecraft.server.v1_14_R1.NBTTagString;
+import net.minecraft.server.v1_15_R1.NBTBase;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_15_R1.NBTTagDouble;
+import net.minecraft.server.v1_15_R1.NBTTagFloat;
+import net.minecraft.server.v1_15_R1.NBTTagList;
+import net.minecraft.server.v1_15_R1.NBTTagLong;
+import net.minecraft.server.v1_15_R1.NBTTagShort;
+import net.minecraft.server.v1_15_R1.NBTTagString;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -47,7 +47,7 @@ public class NBTCompound {
 	 * @return The size of tha tag compound.
 	 * */
 	public int size() {
-		return this.tag.d();
+		return this.tag.e();
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class NBTCompound {
 				"Cannot set that short array; the array is null. Please use .remove(key) instead.");
 		NBTTagList list = new NBTTagList();
 		for (short value : values) {
-			list.add(new NBTTagShort(value));
+			list.add(NBTTagShort.a(value));
 		}
 		this.tag.set(key, list);
 	}
@@ -421,7 +421,7 @@ public class NBTCompound {
 				"Cannot set that long array; the array is null. Please use .remove(key) instead.");
 		NBTTagList list = new NBTTagList();
 		for (long value : values) {
-			list.add(new NBTTagLong(value));
+			list.add(NBTTagLong.a(value));
 		}
 		this.tag.set(key, list);
 	}
@@ -498,7 +498,7 @@ public class NBTCompound {
 				"Cannot set that float array; the array is null. Please use .remove(key) instead.");
 		NBTTagList list = new NBTTagList();
 		for (float value : values) {
-			list.add(new NBTTagFloat(value));
+			list.add(NBTTagFloat.a(value));
 		}
 		this.tag.set(key, list);
 	}
@@ -573,7 +573,7 @@ public class NBTCompound {
 				"Cannot set that double array; the array is null. Please use .remove(key) instead.");
 		NBTTagList list = new NBTTagList();
 		for (double value : values) {
-			list.add(new NBTTagDouble(value));
+			list.add(NBTTagDouble.a(value));
 		}
 		this.tag.set(key, list);
 	}
@@ -678,7 +678,7 @@ public class NBTCompound {
 				"Cannot set that String array; the array is null. Please use .remove(key) instead.");
 		NBTTagList list = new NBTTagList();
 		for (String value : values) {
-			list.add(new NBTTagString(value));
+			list.add(NBTTagString.a(value));
 		}
 		this.tag.set(key, list);
 	}
@@ -774,7 +774,7 @@ public class NBTCompound {
 	@Nonnull
 	public static NBTCompound fromItem(@Nonnull ItemStack item) {
 		Preconditions.checkNotNull(item, "Cannot create an NBTCompound from that item; the item is null.");
-		net.minecraft.server.v1_14_R1.ItemStack craftItem = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_15_R1.ItemStack craftItem = CraftItemStack.asNMSCopy(item);
 		if (craftItem == null) {
 			throw new IllegalArgumentException(
 					"Cannot get the NBTCompound to that item; cannot convert to CraftItemStack.");
@@ -798,7 +798,7 @@ public class NBTCompound {
 	public static ItemStack toItem(@Nonnull ItemStack item, @Nonnull NBTCompound nbt) {
 		Preconditions.checkNotNull(item, "Cannot set the NBTCompound to that item; the item is null.");
 		Preconditions.checkNotNull(nbt, "Cannot set the NBTCompound to that item; the nbt is null.");
-		net.minecraft.server.v1_14_R1.ItemStack craftItem = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_15_R1.ItemStack craftItem = CraftItemStack.asNMSCopy(item);
 		if (craftItem == null) {
 			throw new IllegalArgumentException(
 					"Cannot set the NBTCompound to that item; cannot convert to CraftItemStack.");

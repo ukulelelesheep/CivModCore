@@ -5,7 +5,7 @@
 
 	<groupId>vg.civcraft.mc.civmodcore</groupId>
 	<artifactId>CivModCore</artifactId>
-	<version>1.7.6</version>
+	<version>1.8.0</version>
 
 	<name>CivModCore</name>
 	<url>https://github.com/DevotedMC/CivModCore/</url>
@@ -117,7 +117,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
-			<version>1.14.4-R0.1-SNAPSHOT</version>
+			<version>1.15.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
