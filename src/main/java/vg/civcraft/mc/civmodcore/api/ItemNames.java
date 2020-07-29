@@ -21,6 +21,8 @@ import vg.civcraft.mc.civmodcore.CivModCorePlugin;
 
 /**
  * Class that loads and store item names. Replaces NiceNames.
+ * 
+ * materials.csv has not been updated to 1.16 yet
  * */
 public final class ItemNames {
 
@@ -50,8 +52,8 @@ public final class ItemNames {
 				String line = reader.readLine();
 				while (line != null) {
 					String [] values = line.split(",");
-					// If there's not at least three values (slug, data, name) then skip
-					if (values.length < 2) {
+					// If there's not at least two values (slug, name) then skip
+					if (values.length < 1) {
 						logger.warning("This material row does not have enough data: " + line);
 						// Go to the next line
 						line = reader.readLine();
@@ -75,7 +77,7 @@ public final class ItemNames {
 					}
 					// Put the material and name into the system
 					itemNames.put(generateItemHash(material, null), name);
-					logger.info(String.format("Material parsed: %s = %s", material, name));
+					//logger.info(String.format("Material parsed: %s = %s", material, name));
 					line = reader.readLine();
 				}
 				reader.close();

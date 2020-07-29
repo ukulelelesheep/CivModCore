@@ -1,18 +1,20 @@
 package vg.civcraft.mc.civmodcore.api;
 
-import com.google.common.base.Preconditions;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.bukkit.Bukkit;
+
 import org.bukkit.enchantments.Enchantment;
+
+import com.google.common.base.Preconditions;
+
+import vg.civcraft.mc.civmodcore.ACivMod;
 import vg.civcraft.mc.civmodcore.CivModCorePlugin;
 
 /**
@@ -20,7 +22,7 @@ import vg.civcraft.mc.civmodcore.CivModCorePlugin;
  * */
 public final class EnchantmentNames {
 
-	private static final Logger logger = Bukkit.getLogger();
+	private static final ACivMod logger = CivModCorePlugin.getInstance();
 
 	private static final Map<Enchantment, String> enchantmentNames = new HashMap<>();
 
@@ -72,13 +74,13 @@ public final class EnchantmentNames {
 					}
 					// Put the enchantment and name into the system
 					enchantmentNames.put(enchantment, name);
-					logger.info(String.format("Enchantment parsed: %s = %s", enchantment, name));
+					//logger.info(String.format("Enchantment parsed: %s = %s", enchantment, name));
 					line = reader.readLine();
 				}
 				reader.close();
 			}
 			catch (IOException error) {
-				logger.log(Level.WARNING, "Could not load enchantments from enchantments.csv", error);
+				logger.warning("Could not load enchantments from enchantments.csv", error);
 			}
 		}
 		else {

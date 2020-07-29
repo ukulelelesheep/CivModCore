@@ -116,9 +116,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>1.14.4-R0.1-SNAPSHOT</version>
+			<artifactId>spigot-api</artifactId>
+			<version>1.16.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+    		<groupId>com.google.code.findbugs</groupId>
+    		<artifactId>jsr305</artifactId>
+    		<version>3.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zaxxer</groupId>
@@ -133,6 +138,10 @@
 	</dependencies>
 
 	<repositories>
+    	<repository>
+        	<id>spigot-repo</id>
+        	<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    	</repository>
 		<repository>
 			<id>devoted-repo</id>
 			<url>https://build.devotedmc.com/plugin/repository/everything/</url>

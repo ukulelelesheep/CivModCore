@@ -1,16 +1,18 @@
 package vg.civcraft.mc.civmodcore.api;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
 import javax.annotation.Nullable;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 
 /**
  * Class of static APIs for Spawn Eggs.
  * */
 public final class SpawnEggAPI {
-
+	
 	private static final BiMap<Material, EntityType> spawnEggs = ImmutableBiMap.<Material, EntityType>builder().
 			put(Material.BAT_SPAWN_EGG, EntityType.BAT).
 			put(Material.BLAZE_SPAWN_EGG, EntityType.BLAZE).
@@ -67,8 +69,12 @@ public final class SpawnEggAPI {
 			put(Material.WITHER_SKELETON_SPAWN_EGG, EntityType.WITHER_SKELETON).
 			put(Material.WOLF_SPAWN_EGG, EntityType.WOLF).
 			put(Material.ZOMBIE_HORSE_SPAWN_EGG, EntityType.ZOMBIE_HORSE).
-			put(Material.ZOMBIE_PIGMAN_SPAWN_EGG, EntityType.PIG_ZOMBIE).
+			put(Material.HOGLIN_SPAWN_EGG, EntityType.HOGLIN).
+			put(Material.PIGLIN_SPAWN_EGG, EntityType.PIGLIN).
+			put(Material.STRIDER_SPAWN_EGG, EntityType.STRIDER).
+			put(Material.ZOGLIN_SPAWN_EGG, EntityType.ZOGLIN).
 			put(Material.ZOMBIE_SPAWN_EGG, EntityType.ZOMBIE).
+			put(Material.ZOMBIFIED_PIGLIN_SPAWN_EGG, EntityType.ZOMBIFIED_PIGLIN).
 			put(Material.ZOMBIE_VILLAGER_SPAWN_EGG, EntityType.ZOMBIE_VILLAGER).
 			build();
 

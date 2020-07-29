@@ -1,17 +1,5 @@
 package vg.civcraft.mc.civmodcore.itemHandling;
 
-import net.minecraft.server.v1_14_R1.NBTTagCompound;
-import net.minecraft.server.v1_14_R1.NBTTagList;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_14_R1.inventory.CraftItemStack;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import vg.civcraft.mc.civmodcore.api.ItemAPI;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,7 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.Repairable;
+
+import vg.civcraft.mc.civmodcore.api.ItemAPI;
 
 /**
  * Allows the storage and comparison of itemstacks while ignoring their maximum possible stack sizes. This offers
@@ -31,8 +28,6 @@ import java.util.logging.Logger;
  * work if all methods are executed on the instance containing items with a durability of -1.
  */
 public class ItemMap {
-
-	private static final Logger log = Bukkit.getLogger();
 
 	private HashMap<ItemStack, Integer> items;
 
@@ -568,55 +563,13 @@ public class ItemMap {
 	private static ItemStack createMapConformCopy(ItemStack is) {
 		ItemStack copy = is.clone();
 		copy.setAmount(1);
-		net.minecraft.server.v1_14_R1.ItemStack s = CraftItemStack.asNMSCopy(copy);
-		if (s == null) {
-			log.info("Attempted to create map conform copy of " + copy.toString()
-					+ ", but couldn't because this item can't be held in inventories since Minecraft 1.8");
-			return null;
+
+		if (copy instanceof Repairable) {
+			((Repairable) copy).setRepairCost(0);
 		}
-		s.setRepairCost(0);
-		copy = CraftItemStack.asBukkitCopy(s);
+		
 		return copy;
 	}
 
-	/**
-	 * Utility to add NBT tags to an item and produce a custom stack size
-	 *
-	 * @param is
-	 *            Template Bukkit ItemStack
-	 * @param amt
-	 *            Output Stack Size
-	 * @param map
-	 *            Java Maps and Lists representing NBT data
-	 * @return Cloned ItemStack with amount set to amt and NBT set to map.
-	 */
-	public static ItemStack enrichWithNBT(ItemStack is, int amt, Map<String, Object> map) {
-		log.info("Received request to enrich " + is.toString());
-		ItemStack copy = is.clone();
-		amt = (amt < 1 ? 1 : amt > is.getMaxStackSize() ? is.getMaxStackSize() : amt);
-		copy.setAmount(amt);
-		net.minecraft.server.v1_14_R1.ItemStack s = CraftItemStack.asNMSCopy(copy);
-		if (s == null) {
-			log.severe("Failed to create enriched copy of " + copy.toString());
-			return null;
-		}
-
-		NBTTagCompound nbt = s.getTag();
-		if (nbt == null) {
-			nbt = new NBTTagCompound();
-		}
-
-		TagManager.mapToNBT(nbt, map);
-		s.setTag(nbt);
-		copy = CraftItemStack.asBukkitCopy(s);
-		return copy;
-	}
-
-	public static NBTTagCompound mapToNBT(NBTTagCompound base, Map<String, Object> map) {
-		return TagManager.mapToNBT(base, map);
-	}
-
-	public static NBTTagList listToNBT(NBTTagList base, List<Object> list) {
-		return TagManager.listToNBT(base, list);
-	}
+	
 }
